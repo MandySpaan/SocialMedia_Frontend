@@ -1,0 +1,53 @@
+.register-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10em;
+}
+
+.register-container {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1), 0 0.375em 1.25em rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    border-radius: 0.5em;
+    width: fit-content;
+
+    h1 {
+        font-size: 2.5em;
+        font-weight: 700;
+        color: #333;
+        margin: 0;
+      }
+
+      p {
+        font-size: 1em;
+        margin: 0.5em;
+      }
+
+    input {
+        width: 20em;
+        padding: 0.8em;
+        margin: 0.5em 0;
+        border: 0.06em solid #ccc;
+        border-radius: 0.3em;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      input[type="button"] {
+        background-color: rgb(63, 63, 63);
+        font-weight: bold;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      input[type="button"]:hover {
+        background-color: rgb(80, 80, 80);
+      }
+}
