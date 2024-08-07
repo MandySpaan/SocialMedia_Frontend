@@ -1,6 +1,27 @@
+import { useState } from "react";
 import "./Login.css";
 
 const Login = () => {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  interface Credentials {
+    email: string;
+    password: string;
+  }
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setCredentials((prevState: Credentials) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
+
+  console.log(credentials);
+
   return (
     <div className="login-page">
       <div className="intro-container">
@@ -11,12 +32,21 @@ const Login = () => {
         </p>
       </div>
       <div className="login-container">
-        <input type="text" name="email" id="email" placeholder="Email" />
+        <input
+          type="text"
+          name="email"
+          id="email"
+          placeholder="Email"
+          onChange={handleChange}
+          autoComplete="email"
+        />
         <input
           type="password"
           name="password"
           id="password"
           placeholder="Password"
+          onChange={handleChange}
+          autoComplete="current-password"
         />
         <input type="button" value="Login" />
         <p>No account yet? Register here</p>
