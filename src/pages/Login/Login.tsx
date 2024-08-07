@@ -29,8 +29,6 @@ const Login = () => {
     try {
       const response = await loginUser(credentials);
 
-      console.log(response.data);
-
       if (response.success) {
         const decodedToken = jwtDecode(response.data);
         const passport = {
