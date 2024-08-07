@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
+import { registerUser } from "../../services/authApiCalls";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
@@ -12,6 +14,8 @@ const Register = () => {
     password: string;
   }
 
+  const navigate = useNavigate();
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setCredentials((prevState: Credentials) => ({
@@ -20,7 +24,19 @@ const Register = () => {
     }));
   }
 
-  console.log(credentials);
+  async function register() {
+    try {
+      const response = await registerUser(credentials);
+
+      if (response.success) {
+        navigate("/login");
+      } else {
+        alert(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="register-page">
@@ -43,7 +59,7 @@ const Register = () => {
           onChange={handleChange}
           autoComplete="current-password"
         />
-        <input type="button" value="Create account" />
+        <input type="button" value="Create account" onClick={register} />
       </div>
     </div>
   );
