@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { loginUser } from "../../services/authApiCalls";
+import { jwtDecode } from "jwt-decode";
 import "./Login.css";
 
 const Login = () => {
@@ -12,6 +15,8 @@ const Login = () => {
     password: string;
   }
 
+  const navigate = useNavigate();
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     setCredentials((prevState: Credentials) => ({
@@ -20,7 +25,27 @@ const Login = () => {
     }));
   }
 
-  console.log(credentials);
+  async function login() {
+    try {
+      const response = await loginUser(credentials);
+
+      console.log(response.data);
+
+      if (response.success) {
+        const decodedToken = jwtDecode(response.data);
+        const passport = {
+          token: response.data,
+          tokenData: decodedToken,
+        };
+        localStorage.setItem("passport", JSON.stringify(passport));
+        navigate("/");
+      } else {
+        alert(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="login-page">
@@ -48,8 +73,10 @@ const Login = () => {
           onChange={handleChange}
           autoComplete="current-password"
         />
-        <input type="button" value="Login" />
-        <p>No account yet? Register here</p>
+        <input type="button" value="Login" onClick={login} />
+        <p>
+          No account yet? <NavLink to="/register">Register here</NavLink>
+        </p>
       </div>
     </div>
   );
