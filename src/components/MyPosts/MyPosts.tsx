@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { getMyPosts } from "../../services/postsApiCalls";
 import { NavLink } from "react-router-dom";
+import "./MyPosts.css";
 
 export const MyPosts = () => {
   const [myPosts, setMyPosts] = useState([]);
@@ -12,15 +13,24 @@ export const MyPosts = () => {
     const bringMyPosts = async () => {
       if (passport) {
         const response = await getMyPosts(passport.token);
-        setMyPosts(response.data || []);
+        setMyPosts(response.data);
       }
     };
+
     bringMyPosts();
+  }, []);
+
+  useEffect(() => {
+    if (passport) {
+      localStorage.setItem("passport", JSON.stringify(passport));
+    } else {
+      localStorage.removeItem("passport");
+    }
   }, [passport]);
 
   return (
-    <div className="myappointment-box">
-      <h2>My Appointments</h2>
+    <div className="myposts-box">
+      <h2>My Posts</h2>
       {myPosts.length > 0 ? (
         myPosts.map(
           (post: {
@@ -30,9 +40,11 @@ export const MyPosts = () => {
             likes: string[];
           }) => (
             <div className="my-posts" key={post._id}>
-              <div className="title">{post.title}</div>
+              <div className="title-likes">
+                <div className="title">{post.title}</div>
+                <div className="likes">{`likes: ${post.likes.length}`}</div>
+              </div>
               <div className="description">{post.description}</div>
-              <div className="likes">{post.likes.length}</div>
             </div>
           )
         )
