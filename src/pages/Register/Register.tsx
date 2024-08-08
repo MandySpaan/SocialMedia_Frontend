@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Register.css";
 import { registerUser } from "../../services/authApiCalls";
 
@@ -70,6 +70,11 @@ const Register = () => {
           autoComplete="current-password"
         />
         <input type="button" value="Create account" onClick={register} />
+      </div>
+      <div className="small">
+        <p>
+          Already have an account? <NavLink to="/login">Login</NavLink> instead.
+        </p>
       </div>
     </div>
   );

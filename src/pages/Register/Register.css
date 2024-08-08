@@ -1,9 +1,14 @@
 .register-page {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 10em;
+    margin-top: 8em;
+
+    .small {
+        font-size: 0.8em;
+        margin-top: 0.5em;
+    }
 }
 
 .register-container {
