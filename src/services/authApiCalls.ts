@@ -1,6 +1,7 @@
 const URL = "http://localhost:4000";
 
 interface Credentials {
+  username?: string;
   email: string;
   password: string;
 }

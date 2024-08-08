@@ -5,11 +5,13 @@ import { registerUser } from "../../services/authApiCalls";
 
 const Register = () => {
   const [credentials, setCredentials] = useState({
+    username: "",
     email: "",
     password: "",
   });
 
   interface Credentials {
+    username: string;
     email: string;
     password: string;
   }
@@ -43,6 +45,14 @@ const Register = () => {
       <div className="register-container">
         <h1>GeekTok</h1>
         <p>Create Your GeekTok Account now</p>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Username"
+          onChange={handleChange}
+          autoComplete="username"
+        />
         <input
           type="text"
           name="email"

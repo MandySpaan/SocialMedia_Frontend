@@ -5,6 +5,7 @@ import "./MyProfile.css";
 
 const MyProfile = () => {
   const [profileData, setProfileData] = useState({
+    username: "",
     first_name: "",
     last_name: "",
     email: "",
@@ -22,9 +23,10 @@ const MyProfile = () => {
 
   return (
     <div className="myprofile-box">
-      <h2>
+      <h2>{profileData.username}</h2>
+      <p>
         {profileData.first_name} {profileData.last_name}
-      </h2>
+      </p>
     </div>
   );
 };
