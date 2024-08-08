@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/authApiCalls";
 import { jwtDecode } from "jwt-decode";
 import "./Login.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -15,7 +16,14 @@ const Login = () => {
     password: string;
   }
 
+  const { passport, setPassport } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (passport && passport.token) {
+      navigate("/");
+    }
+  }, [passport]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -31,12 +39,11 @@ const Login = () => {
 
       if (response.success) {
         const decodedToken = jwtDecode(response.data);
-        const passport = {
+        setPassport({
           token: response.data,
           tokenData: decodedToken,
-        };
+        });
         localStorage.setItem("passport", JSON.stringify(passport));
-        navigate("/");
       } else {
         alert(response.message);
       }

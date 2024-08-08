@@ -13,10 +13,11 @@ const Navbar = () => {
     setShowNav(!showNav);
   };
 
-  const { passport } = useAuth();
+  const { passport, setPassport } = useAuth();
 
   const logOut = () => {
     localStorage.removeItem("passport");
+    setPassport(null);
     navigate("/login");
   };
 

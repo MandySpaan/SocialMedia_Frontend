@@ -7,9 +7,13 @@ interface Passport {
 
 interface AuthContextProps {
   passport: Passport | null;
+  setPassport: React.Dispatch<React.SetStateAction<Passport | null>>;
 }
 
-const AuthContext = createContext<AuthContextProps>({ passport: null });
+const AuthContext = createContext<AuthContextProps>({
+  passport: null,
+  setPassport: () => {},
+});
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -23,6 +27,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setPassport(JSON.parse(passportString));
     }
     setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    if (passport) {
+      localStorage.setItem("passport", JSON.stringify(passport));
+    } else {
+      localStorage.removeItem("passport");
+    }
   }, [passport]);
 
   if (loading) {
@@ -30,7 +42,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }
 
   return (
-    <AuthContext.Provider value={{ passport }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ passport, setPassport }}>
+      {!loading && children}
+    </AuthContext.Provider>
   );
 };
 
