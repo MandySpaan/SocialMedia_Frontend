@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { getMyProfile } from "../../services/userApiCalls";
+import "./MyProfile.css";
 
 const MyProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -20,7 +21,7 @@ const MyProfile = () => {
   }, []);
 
   return (
-    <div>
+    <div className="myprofile-box">
       <h2>
         {profileData.first_name} {profileData.last_name}
       </h2>

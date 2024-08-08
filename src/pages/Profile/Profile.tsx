@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import MyPosts from "../../components/MyPosts/MyPosts";
 import MyProfile from "../../components/MyProfile/MyProfile";
+import "./Profile.css";
 
 const Profile = () => {
   const { passport } = useAuth();
@@ -18,9 +19,13 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <h1>Profile</h1>
-      <MyProfile />
-      <MyPosts />
+      <div className="profile-page-title">
+        <h1>My Profile Page</h1>
+      </div>
+      <div className="profile-page">
+        <MyProfile />
+        <MyPosts />
+      </div>
     </div>
   );
 };
