@@ -1,21 +1,13 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const Home = () => {
+  const { passport } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const passportString = localStorage.getItem("passport");
-
-    let passport = null;
-    if (passportString) {
-      passport = JSON.parse(passportString);
-    }
-
-    if (!passport || !passport.token) {
-      navigate("/login");
-    }
-  }, [navigate]);
+  if (!passport || !passport.token) {
+    navigate("/login");
+  }
 
   return <div>Home</div>;
 };
