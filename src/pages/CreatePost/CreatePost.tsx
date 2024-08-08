@@ -46,7 +46,8 @@ const CreatePost = () => {
       <Navbar />
       <h1>CreatePost</h1>
       <div className="createpost-page">
-        <div className="createpost-box">
+        <div className="createpost-container">
+          <h2>What would you like to share?</h2>
           <div className="title">
             <input
               type="text"
@@ -63,6 +64,7 @@ const CreatePost = () => {
               placeholder="Description"
               onChange={(e) => inputHandler(e)}
             />
+            <br />
             <button onClick={handleSubmit}>Create Post</button>
           </div>
         </div>
