@@ -19,9 +19,7 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <div className="profile-page-title">
-        <h1>My Profile Page</h1>
-      </div>
+      <h1>My Profile Page</h1>
       <div className="profile-page">
         <MyProfile />
         <MyPosts />

@@ -1,4 +1,13 @@
 #root {
-    background-color: rgb(252, 252, 196);
     width: 100vw;
+    height: 100vh;
+}
+
+html, body {
+    background-color: rgb(252, 252, 196) !important;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0em;
 }

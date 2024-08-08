@@ -1,11 +1,3 @@
-.profile-page-title {
-    text-align: center;
-
-    h1 {
-    margin-bottom: 0em;
-}
-}
-
 .profile-page {
     display: flex;
     flex-direction: row;
