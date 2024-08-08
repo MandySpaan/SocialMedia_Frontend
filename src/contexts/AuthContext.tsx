@@ -23,7 +23,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       setPassport(JSON.parse(passportString));
     }
     setLoading(false);
-  }, []);
+  }, [passport]);
 
   if (loading) {
     return <div>Loading...</div>;
