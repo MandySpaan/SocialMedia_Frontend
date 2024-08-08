@@ -15,13 +15,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [passport, setPassport] = useState<Passport | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const passportString = localStorage.getItem("passport");
     if (passportString) {
       setPassport(JSON.parse(passportString));
     }
+    setLoading(false);
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider value={{ passport }}>{children}</AuthContext.Provider>
