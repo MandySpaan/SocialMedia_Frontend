@@ -28,7 +28,7 @@ const MyProfile = () => {
 
   useEffect(() => {}, [editing]);
 
-  const editview = () => {
+  const editView = () => {
     setEditing(!editing);
   };
 
@@ -52,7 +52,7 @@ const MyProfile = () => {
           </div>
           <div className="link-to-edit">
             <p>
-              <span onClick={editview} className="link-style">
+              <span onClick={editView} className="link-style">
                 Edit your profile
               </span>
             </p>
