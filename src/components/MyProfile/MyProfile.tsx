@@ -24,15 +24,11 @@ const MyProfile = () => {
       setProfileData(response.data);
     };
     bringMyProfile();
-  }, []);
-
-  useEffect(() => {}, [editing]);
+  }, [editing]);
 
   const editView = () => {
     setEditing(!editing);
   };
-
-  console.log(editing);
 
   return (
     <div className="myprofile-box">

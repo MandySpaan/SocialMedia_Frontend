@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useEditing } from "../../contexts/EditingContext";
 import { useAuth } from "../../contexts/AuthContext";
-import { getMyProfile } from "../../services/userApiCalls";
+import { getMyProfile, updateProfile } from "../../services/userApiCalls";
 import "./EditProfile.css";
 
 const EditProfile = () => {
-  const { editing, setEditing } = useEditing();
-
   const [profileData, setProfileData] = useState({
     first_name: "",
     last_name: "",
@@ -16,26 +14,59 @@ const EditProfile = () => {
     password: "",
   });
 
-  useEffect(() => {}, [editing]);
+  const [editData, setEditData] = useState({
+    first_name: "",
+    last_name: "",
+    username: "",
+    description: "",
+    email: "",
+    password: "",
+  });
 
+  const { editing, setEditing } = useEditing();
   const { passport } = useAuth();
 
   useEffect(() => {
     const bringMyProfile = async () => {
       const response = await getMyProfile(passport!.token);
       setProfileData(response.data);
+      setEditData(response.data);
     };
     bringMyProfile();
-  }, []);
+  }, [passport]);
 
-  useEffect(() => {}, [editing]);
+  const handleSubmit = async () => {
+    const dataToSubmit = { ...profileData, ...editData };
 
-  const handleSubmit = () => {
-    setEditing(!editing);
+    Object.keys(dataToSubmit).forEach((key) => {
+      if (dataToSubmit[key as keyof typeof dataToSubmit] === "") {
+        delete dataToSubmit[key as keyof typeof dataToSubmit];
+      }
+    });
+
+    const response = await updateProfile(dataToSubmit, passport!.token);
+    if (response.success) {
+      const bringMyProfile = async () => {
+        const response = await getMyProfile(passport!.token);
+        setProfileData(response.data);
+      };
+      bringMyProfile();
+      setEditing(!editing);
+    }
   };
 
   const profileView = () => {
     setEditing(!editing);
+  };
+
+  const editInputHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setEditData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   return (
@@ -47,7 +78,9 @@ const EditProfile = () => {
           type="text"
           id="username"
           name="username"
-          placeholder={profileData.username}
+          defaultValue={editData.username}
+          placeholder="Leave empty to keep current"
+          onChange={editInputHandler}
         />
       </div>
       <div className="input-label-field">
@@ -55,7 +88,9 @@ const EditProfile = () => {
         <textarea
           id="description"
           name="description"
-          placeholder={profileData.description}
+          defaultValue={editData.description}
+          placeholder="Leave empty to keep current"
+          onChange={editInputHandler}
         />
       </div>
       <div className="input-label-field">
@@ -64,7 +99,9 @@ const EditProfile = () => {
           type="text"
           id="first-name"
           name="first_name"
-          placeholder={profileData.first_name}
+          defaultValue={editData.first_name}
+          placeholder="Leave empty to keep current"
+          onChange={editInputHandler}
         />
       </div>
       <div className="input-label-field">
@@ -73,7 +110,9 @@ const EditProfile = () => {
           type="text"
           id="last-name"
           name="last_name"
-          placeholder={profileData.last_name}
+          defaultValue={editData.last_name}
+          placeholder="Leave empty to keep current"
+          onChange={editInputHandler}
         />
       </div>
       <div className="input-label-field">
@@ -82,7 +121,9 @@ const EditProfile = () => {
           type="email"
           id="email"
           name="email"
-          placeholder={profileData.email}
+          defaultValue={editData.email}
+          placeholder="Leave empty to keep current"
+          onChange={editInputHandler}
         />
       </div>
       <div className="input-label-field">
@@ -92,6 +133,7 @@ const EditProfile = () => {
           id="password"
           name="password"
           placeholder="Enter new password"
+          onChange={editInputHandler}
         />
       </div>
       <div className="edit-buttons">
