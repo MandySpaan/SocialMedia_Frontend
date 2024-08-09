@@ -9,34 +9,17 @@
     padding: 3em;
     border-radius: 0.5em;
 
-  h2 {
-    text-align: center;
-    margin-top: -0.3em;
-    margin-bottom: 0.5em;
-    color: #333;
-  }
-
-  .only-editlink {
-    display: flex;
-    justify-content: center;
-  }
-
-  .fullname-editlink {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: -1.5em;
-
-    h3 {
-      margin: 0;
+    h2 {
+      text-align: center;
+      margin-top: -0.3em;
+      margin-bottom: 0;
       color: #333;
     }
 
-    .edit-link {
-      text-decoration: none;
-      color: #333;
-      font-size: 0.8em;
+    .profile-view {
+      display: flex;
+      flex-direction: column;
+      justify-content: center
     }
-  }
 
   }

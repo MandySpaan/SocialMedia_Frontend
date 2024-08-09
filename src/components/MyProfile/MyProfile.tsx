@@ -33,26 +33,14 @@ const MyProfile = () => {
   return (
     <div className="myprofile-box">
       <h2>{profileData.username}</h2>
-      <div className={editing ? "hidden" : " "}>
-        <div
-          className={
-            !profileData.first_name && !profileData.last_name
-              ? "only-editlink"
-              : "fullname-editlink"
-          }
-        >
-          <div className="full-name bold">
-            <p>
-              {profileData.first_name} {profileData.last_name}
-            </p>
-          </div>
-          <div className="link-to-edit">
-            <p>
-              <span onClick={editView} className="link-style">
-                Edit your profile
-              </span>
-            </p>
-          </div>
+      <div className={editing ? "hidden" : "profile-view"}>
+        <span onClick={editView} id="edit-profile" className="link-style">
+          Edit your profile
+        </span>
+        <div className="full-name bold">
+          <p>
+            {profileData.first_name} {profileData.last_name}
+          </p>
         </div>
         <p>{profileData.description}</p>
       </div>
