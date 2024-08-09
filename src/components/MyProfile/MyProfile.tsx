@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { getMyProfile } from "../../services/userApiCalls";
+import EditProfile from "../EditProfile/EditProfile";
 import "./MyProfile.css";
+import { useEditing } from "../../contexts/EditingContext";
 
 const MyProfile = () => {
   const [profileData, setProfileData] = useState({
@@ -12,7 +14,7 @@ const MyProfile = () => {
     email: "",
   });
 
-  const [editing, setEditing] = useState(false);
+  const { editing, setEditing } = useEditing();
 
   const { passport } = useAuth();
 
@@ -24,6 +26,8 @@ const MyProfile = () => {
     bringMyProfile();
   }, []);
 
+  useEffect(() => {}, [editing]);
+
   const editview = () => {
     setEditing(!editing);
   };
@@ -33,27 +37,32 @@ const MyProfile = () => {
   return (
     <div className="myprofile-box">
       <h2>{profileData.username}</h2>
-      <div
-        className={
-          !profileData.first_name && !profileData.last_name
-            ? "only-editlink"
-            : "fullname-editlink"
-        }
-      >
-        <div className="full-name bold">
-          <p>
-            {profileData.first_name} {profileData.last_name}
-          </p>
+      <div className={editing ? "hidden" : " "}>
+        <div
+          className={
+            !profileData.first_name && !profileData.last_name
+              ? "only-editlink"
+              : "fullname-editlink"
+          }
+        >
+          <div className="full-name bold">
+            <p>
+              {profileData.first_name} {profileData.last_name}
+            </p>
+          </div>
+          <div className="link-to-edit">
+            <p>
+              <span onClick={editview} className="link-style">
+                Edit your profile
+              </span>
+            </p>
+          </div>
         </div>
-        <div className="link-to-edit">
-          <p>
-            <span onClick={editview} className="link-style">
-              Edit your profile
-            </span>
-          </p>
-        </div>
+        <p>{profileData.description}</p>
       </div>
-      <p>{profileData.description}</p>
+      <div className={!editing ? "hidden" : " "}>
+        <EditProfile />
+      </div>
     </div>
   );
 };
