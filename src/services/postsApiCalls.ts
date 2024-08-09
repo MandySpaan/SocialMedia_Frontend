@@ -24,3 +24,15 @@ export const createPost = async (data: any, token: string) => {
 
   return await response.json();
 };
+
+export const deletePostById = async (token: string, id: string) => {
+  const response = await fetch(`${URL}/api/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+};

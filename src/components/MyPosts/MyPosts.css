@@ -3,7 +3,6 @@
     box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1), 0 0.375em 1.25em rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 32em;
     height: auto;
     margin: 2em;
@@ -15,6 +14,11 @@
     margin-top: -0.3em;
     margin-bottom: 0.5em;
     color: #333;
+  }
+
+  span {
+    margin-top: 0.7em;
+    margin-left: 1em;
   }
 
   .my-posts {
@@ -32,4 +36,26 @@
     font-weight: bold;
   }
 
+  .likes {
+    min-width: max-content;
+    padding-left: 1em;
   }
+
+  .description-deletepost {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+  }
+
+  .delete-post {
+    height: fit-content;
+    border-color: gray;
+    margin-left: 0.8em;
+  }
+
+  .delete-post:hover {
+    background-color: #cf0000!important;
+    color: white;
+
+  }
+}
