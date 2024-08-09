@@ -20,14 +20,6 @@ export const MyPosts = () => {
     bringMyPosts();
   }, []);
 
-  useEffect(() => {
-    if (passport) {
-      localStorage.setItem("passport", JSON.stringify(passport));
-    } else {
-      localStorage.removeItem("passport");
-    }
-  }, [passport]);
-
   return (
     <div className="myposts-box">
       <h2>My Posts</h2>
