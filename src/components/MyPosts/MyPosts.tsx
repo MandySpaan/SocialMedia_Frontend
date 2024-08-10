@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { deletePostById, getMyPosts } from "../../services/postsApiCalls";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./MyPosts.css";
 
 const MyPosts = () => {
   const [myPosts, setMyPosts] = useState([]);
-
   const [editing, setEditing] = useState(false);
-
   const { passport } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const bringMyPosts = async () => {
@@ -22,8 +21,9 @@ const MyPosts = () => {
     bringMyPosts();
   }, [editing, myPosts]);
 
-  const saveChangesHandler = () => {
-    console.log("save changes");
+  const makeChangesHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const postId = event.currentTarget.name;
+    navigate(`/edit-post/${postId}`);
   };
 
   const deletePostHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -68,11 +68,11 @@ const MyPosts = () => {
                 <div className="post-buttons">
                   <button
                     className={editing ? "save-changes" : "hidden"}
-                    value="save-changes"
+                    value="make-changes"
                     name={post._id}
-                    onClick={saveChangesHandler}
+                    onClick={makeChangesHandler}
                   >
-                    Save Changes
+                    Make Changes
                   </button>
                   <button
                     className={editing ? "delete-post" : "hidden"}
@@ -91,7 +91,7 @@ const MyPosts = () => {
         <div className="no-posts">
           <p>
             You have no posts yet,{" "}
-            <NavLink to="/createpost">Create a post</NavLink>.
+            <NavLink to="/create-post">Create a post</NavLink>.
           </p>
         </div>
       )}

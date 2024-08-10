@@ -12,6 +12,26 @@ export const getMyPosts = async (token: string) => {
   return await response.json();
 };
 
+export const getPostById = async (postId: string): Promise<any> => {
+  try {
+    const response = await fetch(`${URL}/api/posts/${postId}`);
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    } else {
+      throw new Error("Expected JSON response");
+    }
+  } catch (error) {
+    console.error("Failed to fetch post:", error);
+    throw error;
+  }
+};
+
 export const createPost = async (data: any, token: string) => {
   const response = await fetch(`${URL}/api/posts`, {
     method: "POST",
