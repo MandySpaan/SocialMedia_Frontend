@@ -22,6 +22,10 @@ const MyPosts = () => {
     bringMyPosts();
   }, [editing, myPosts]);
 
+  const saveChangesHandler = () => {
+    console.log("save changes");
+  };
+
   const deletePostHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.name;
     await deletePostById(passport!.token, id);
@@ -37,9 +41,15 @@ const MyPosts = () => {
       <h2>My Posts</h2>
       {myPosts.length > 0 ? (
         <>
-          <span onClick={editView} className="link-style">
-            Edit your posts
-          </span>
+          {!editing ? (
+            <span onClick={editView} className="link-style">
+              Edit your posts
+            </span>
+          ) : (
+            <span onClick={editView} className="link-style">
+              Cancel editting
+            </span>
+          )}
           {myPosts.map(
             (post: {
               _id: string;
@@ -47,20 +57,30 @@ const MyPosts = () => {
               description: string;
               likes: string[];
             }) => (
-              <div className="my-posts" key={post._id}>
-                <div className="title-likes">
-                  <div className="title">{post.title}</div>
-                  <div className="likes">{`likes: ${post.likes.length}`}</div>
-                </div>
-                <div className="description-deletepost">
+              <div className="myposts-buttons">
+                <div className="my-posts" key={post._id}>
+                  <div className="title-likes">
+                    <div className="title">{post.title}</div>
+                    <div className="likes">{`likes: ${post.likes.length}`}</div>
+                  </div>
                   <div className="description">{post.description}</div>
+                </div>
+                <div className="post-buttons">
+                  <button
+                    className={editing ? "save-changes" : "hidden"}
+                    value="save-changes"
+                    name={post._id}
+                    onClick={saveChangesHandler}
+                  >
+                    Save Changes
+                  </button>
                   <button
                     className={editing ? "delete-post" : "hidden"}
                     value="delete"
                     name={post._id}
                     onClick={deletePostHandler}
                   >
-                    Delete
+                    Delete Post
                   </button>
                 </div>
               </div>

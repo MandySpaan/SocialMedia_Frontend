@@ -16,6 +16,11 @@
     color: #333;
   }
 
+  .myposts-buttons {
+    display: flex;
+    margin-top: 1em;
+  }
+
   .my-posts {
     margin: 1em;
   }
@@ -36,21 +41,27 @@
     padding-left: 1em;
   }
 
-  .description-deletepost {
+  .post-buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     margin-top: 1em;
   }
 
-  .delete-post {
+  .delete-post, .save-changes {
     height: fit-content;
-    border-color: gray;
+    background-color: rgb(63, 63, 63);
+    color: white;
     margin-left: 0.8em;
+    margin-bottom: 0.8em;
+    font-size: 0.8em;
+    padding: 0.2em 1em;
   }
 
   .delete-post:hover {
     background-color: #cf0000!important;
-    color: white;
+  }
 
+  .save-changes:hover {
+    background-color: rgb(22, 177, 22)!important;
   }
 }
