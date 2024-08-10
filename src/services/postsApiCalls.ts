@@ -12,26 +12,6 @@ export const getMyPosts = async (token: string) => {
   return await response.json();
 };
 
-export const getPostById = async (postId: string): Promise<any> => {
-  try {
-    const response = await fetch(`${URL}/api/posts/${postId}`);
-
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const contentType = response.headers.get("Content-Type");
-    if (contentType && contentType.includes("application/json")) {
-      return await response.json();
-    } else {
-      throw new Error("Expected JSON response");
-    }
-  } catch (error) {
-    console.error("Failed to fetch post:", error);
-    throw error;
-  }
-};
-
 export const createPost = async (data: any, token: string) => {
   const response = await fetch(`${URL}/api/posts`, {
     method: "POST",
@@ -55,4 +35,57 @@ export const deletePostById = async (token: string, id: string) => {
   });
 
   return await response.json();
+};
+
+export const getPostById = async (postId: string): Promise<any> => {
+  try {
+    const response = await fetch(`${URL}/api/posts/${postId}`);
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    } else {
+      throw new Error("Expected JSON response");
+    }
+  } catch (error) {
+    console.error("Failed to fetch post:", error);
+    throw error;
+  }
+};
+
+export const updatePostById = async (
+  postId: string,
+  data: any,
+  token: string
+) => {
+  try {
+    const response = await fetch(`${URL}/api/posts/${postId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Network response was not ok. Status: ${response.status}`
+      );
+    }
+
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    } else {
+      throw new Error("Expected JSON response");
+    }
+  } catch (error) {
+    console.error("Failed to update post:", error);
+    throw error;
+  }
 };
