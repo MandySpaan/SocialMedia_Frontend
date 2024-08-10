@@ -1,5 +1,10 @@
 const URL = "http://localhost:4000";
 
+export const getAllPosts = async () => {
+  const response = await fetch(`${URL}/api/posts`);
+  return await response.json();
+};
+
 export const getMyPosts = async (token: string) => {
   const response = await fetch(`${URL}/api/posts/own`, {
     method: "GET",
