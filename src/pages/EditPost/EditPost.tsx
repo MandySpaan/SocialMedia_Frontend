@@ -87,35 +87,37 @@ const EditPostPage = () => {
 
   return (
     <div className="editpost-page">
-      <h1>Edit Post</h1>
-      <div className="input-label-field">
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={editData.title}
-          placeholder={post.title}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="input-label-field">
-        <label htmlFor="description">Content:</label>
-        <textarea
-          id="description"
-          name="description"
-          value={editData.description}
-          placeholder={post.description}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="edit-buttons">
-        <button id="submit-button" onClick={handleSubmit}>
-          Save Changes
-        </button>
-        <button type="button" onClick={handleCancel}>
-          Cancel
-        </button>
+      <div className="editpost-container">
+        <h1>Edit Post</h1>
+        <div className="input-label-field">
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={editData.title}
+            placeholder={post.title}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="input-label-field">
+          <label htmlFor="description">Description:</label>
+          <textarea
+            id="description"
+            name="description"
+            value={editData.description}
+            placeholder={post.description}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="edit-buttons">
+          <button id="submit-button" onClick={handleSubmit}>
+            Save Changes
+          </button>
+          <button id="cancel-button" type="button" onClick={handleCancel}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );
