@@ -1,19 +1,17 @@
-import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import hamburgerImg from "../../img/hamburger-icon.png";
-
-import "./Navbar.css";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import hamburgerImg from "../../img/hamburger-icon.png";
+import "./Navbar.css";
 
 const Navbar = () => {
   const [showNav, setShowNav] = useState(false);
+  const { passport, setPassport } = useAuth();
   const navigate = useNavigate();
 
   const handleShowNavbar = () => {
     setShowNav(!showNav);
   };
-
-  const { passport, setPassport } = useAuth();
 
   const logOut = () => {
     localStorage.removeItem("passport");
@@ -41,7 +39,7 @@ const Navbar = () => {
               <NavLink to="/allposts">All Posts</NavLink>
             </li>
             <li>
-              <NavLink to="/createpost">Create Post</NavLink>
+              <NavLink to="/create-post">Create Post</NavLink>
             </li>
             {passport && passport.token ? (
               <>
