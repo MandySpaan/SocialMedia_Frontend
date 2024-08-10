@@ -1,0 +1,29 @@
+.allposts-page {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 1em;}
+
+.allposts-container {
+    background-color: white;
+    border-radius: 0.5em;
+    border: rgb(126, 126, 126) 0.1em solid;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 26em;
+    padding: 1em;
+    margin: 1em;
+
+    .title-likes {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 0.2em;
+    }
+
+    .likes {
+        min-width: max-content;
+        padding-left: 1em;
+    }
+}
