@@ -33,10 +33,16 @@ const MyProfile = () => {
   return (
     <div className="myprofile-box">
       <h2>{profileData.username}</h2>
-      <div className={editing ? "hidden" : "profile-view"}>
+      {!editing ? (
         <span onClick={editView} id="edit-profile" className="link-style">
           Edit your profile
         </span>
+      ) : (
+        <span onClick={editView} id="edit-profile" className="link-style">
+          Cancel editting
+        </span>
+      )}
+      <div className={editing ? "hidden" : "profile-view"}>
         <div className="full-name bold">
           <p>
             {profileData.first_name} {profileData.last_name}

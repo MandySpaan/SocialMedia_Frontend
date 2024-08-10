@@ -1,8 +1,5 @@
 .editprofile-page {
-    h3 {
-        text-align: center;
-        margin-top: 0.7em;
-    }
+    margin-top: 2em;
 
     .input-label-field {
         display: flex;
@@ -39,11 +36,5 @@
         padding: 0.5em;
         margin: 0.5em;
         width: fit-content;
-    }
-
-    #cancel-button {
-        padding: 0.5em;
-        width: fit-content;
-        border-color: grey;
     }
 }

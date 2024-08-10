@@ -23,13 +23,14 @@
 
   .my-posts {
     margin: 1em;
+    color: #333;
   }
 
   .title-likes {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.2em;
   }
 
   .title {

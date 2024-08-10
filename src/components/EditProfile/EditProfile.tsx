@@ -71,7 +71,6 @@ const EditProfile = () => {
 
   return (
     <div className="editprofile-page">
-      <h3>Edit your profile</h3>
       <div className="input-label-field">
         <label htmlFor="username">Username:</label>
         <input
@@ -139,9 +138,6 @@ const EditProfile = () => {
       <div className="edit-buttons">
         <button id="submit-button" onClick={handleSubmit}>
           Submit Changes
-        </button>
-        <button id="cancel-button" onClick={profileView}>
-          Cancel
         </button>
       </div>
     </div>
