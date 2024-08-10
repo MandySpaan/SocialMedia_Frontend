@@ -55,10 +55,6 @@ const EditProfile = () => {
     }
   };
 
-  const profileView = () => {
-    setEditing(!editing);
-  };
-
   const editInputHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
