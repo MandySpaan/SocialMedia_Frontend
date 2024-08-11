@@ -36,6 +36,7 @@
 
   textarea {
     width: 25em !important;
+    height: 12em;
     padding: 0.6em;
     margin: 0.5em 0;
     border: 0.06em solid #ccc;

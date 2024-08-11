@@ -19,3 +19,17 @@ h1 {
 .hidden {
     display: none;
 }
+
+.likes {
+    background-color: #fad368;
+    border: #4e4e4e1f solid 0.05em;
+    border-radius: 0.3em;
+    min-width: max-content;
+    height: max-content;
+    padding: 0.1em 0.5em 0.05em 0.5em;
+    margin-left: 1em;
+}
+
+.likes:hover {
+    cursor: pointer;
+}

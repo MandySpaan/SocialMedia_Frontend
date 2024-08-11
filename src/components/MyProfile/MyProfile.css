@@ -4,9 +4,10 @@
     display: flex;
     flex-direction: column;
     width: 22em;
-    height: auto;
+    height: fit-content;
     margin: 2em;
     padding: 3em;
+    padding-bottom: 5em;
     border-radius: 0.5em;
 
     h2 {
