@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postsApiCalls";
 import Navbar from "../../components/Navbar/Navbar";
+import { handleLikePost } from "../../utils/postUtils";
+import { useAuth } from "../../contexts/AuthContext";
 import "./AllPosts.css";
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
+
+  const { passport } = useAuth();
 
   useEffect(() => {
     const bringAllPosts = async () => {
@@ -18,6 +22,14 @@ const AllPosts = () => {
 
     bringAllPosts();
   }, []);
+
+  const onLikePost = (
+    token: string,
+    postId: string,
+    currentLikes: string[]
+  ) => {
+    handleLikePost(token, postId, currentLikes, setPosts);
+  };
 
   return (
     <>
@@ -40,7 +52,14 @@ const AllPosts = () => {
                   <div className="username">{post.user_id.username}</div>
                   <div className="title-likes">
                     <div className="title bold">{post.title}</div>
-                    <div className="likes">likes: {post.likes.length}</div>
+                    <div
+                      className="likes"
+                      onClick={() =>
+                        onLikePost(passport!.token, post._id, post.likes)
+                      }
+                    >
+                      likes: {post.likes.length}
+                    </div>
                   </div>
                   <div className="description">{post.description}</div>
                 </div>

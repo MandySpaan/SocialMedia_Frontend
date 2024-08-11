@@ -94,3 +94,35 @@ export const updatePostById = async (
     throw error;
   }
 };
+
+export const likePostById = async (
+  token: string,
+  postId: string,
+  currentLikes: string[]
+) => {
+  try {
+    const response = await fetch(`${URL}/api/posts/like/${postId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ likes: currentLikes }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+
+    if (!data.success) {
+      throw new Error(data.message || "Error liking post");
+    }
+
+    return data.data;
+  } catch (error) {
+    console.error("Error liking post:", error);
+    throw error;
+  }
+};
