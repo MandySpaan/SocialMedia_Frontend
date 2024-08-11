@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { deletePostById, getMyPosts } from "../../services/postsApiCalls";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./MyPosts.css";
+import { handleLikePost } from "../../utils/postUtils";
 
 const MyPosts = () => {
   const [myPosts, setMyPosts] = useState([]);
@@ -20,6 +21,14 @@ const MyPosts = () => {
 
     bringMyPosts();
   }, [editing, myPosts]);
+
+  const onLikePost = (
+    token: string,
+    postId: string,
+    currentLikes: string[]
+  ) => {
+    handleLikePost(token, postId, currentLikes, setMyPosts);
+  };
 
   const makeChangesHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
     const postId = event.currentTarget.name;
@@ -57,11 +66,16 @@ const MyPosts = () => {
               description: string;
               likes: string[];
             }) => (
-              <div className="myposts-buttons">
-                <div className="my-posts" key={post._id}>
+              <div className="myposts-buttons" key={post._id}>
+                <div className="my-posts">
                   <div className="title-likes">
                     <div className="title">{post.title}</div>
-                    <div className="likes">{`likes: ${post.likes.length}`}</div>
+                    <div
+                      className="likes"
+                      onClick={() =>
+                        onLikePost(passport!.token, post._id, post.likes)
+                      }
+                    >{`likes: ${post.likes.length}`}</div>
                   </div>
                   <div className="description">{post.description}</div>
                 </div>
