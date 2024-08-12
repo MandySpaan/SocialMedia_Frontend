@@ -1,6 +1,7 @@
 #root {
     width: 100vw;
     height: 100vh;
+    cursor: default;
 }
 
 html, body {
@@ -18,6 +19,11 @@ h1 {
 
 .hidden {
     display: none;
+}
+
+.title:hover {
+    color: rgb(63, 63, 63);
+    cursor: pointer;
 }
 
 .likes {
