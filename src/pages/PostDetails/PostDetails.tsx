@@ -9,6 +9,9 @@ const EditPostPage = () => {
   const [post, setPost] = useState({
     title: "",
     description: "",
+    user_id: { username: "" },
+    likes: [],
+    likedby: [],
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -57,8 +60,15 @@ const EditPostPage = () => {
     <div className="editpost-page">
       <div className="editpost-container">
         <h1>Post Details</h1>
+        <p>{post.user_id.username}</p>
         <p>{post.title}</p>
+        <p>{post.likes.length} likes</p>
         <p>{post.description}</p>
+        <p>
+          {post.likedby.map((user: any) => (
+            <div>{user}</div>
+          ))}
+        </p>
         <button id="back-button" type="button" onClick={handleCancel}>
           Go Back
         </button>
