@@ -69,7 +69,14 @@ const MyPosts = () => {
               <div className="myposts-buttons" key={post._id}>
                 <div className="my-posts">
                   <div className="title-likes">
-                    <div className="title">{post.title}</div>
+                    <div
+                      className="title"
+                      onClick={() => {
+                        navigate(`/post-details/${post._id}`);
+                      }}
+                    >
+                      {post.title}
+                    </div>
                     <div
                       className="likes"
                       onClick={() =>

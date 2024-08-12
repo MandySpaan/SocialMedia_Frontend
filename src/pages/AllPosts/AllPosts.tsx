@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import { getAllPosts } from "../../services/postsApiCalls";
 import Navbar from "../../components/Navbar/Navbar";
 import { handleLikePost } from "../../utils/postUtils";
-import { useAuth } from "../../contexts/AuthContext";
 import "./AllPosts.css";
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
+
+  const navigate = useNavigate();
 
   const { passport } = useAuth();
 
@@ -51,7 +54,14 @@ const AllPosts = () => {
                 <div className="allposts-container" key={post._id}>
                   <div className="username">{post.user_id.username}</div>
                   <div className="title-likes">
-                    <div className="title bold">{post.title}</div>
+                    <div
+                      className="title bold"
+                      onClick={() => {
+                        navigate(`/post-details/${post._id}`);
+                      }}
+                    >
+                      {post.title}
+                    </div>
                     <div
                       className="likes"
                       onClick={() =>
