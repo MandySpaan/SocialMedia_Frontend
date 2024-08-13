@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPostById } from "../../services/postsApiCalls";
+import { getPostById, likePostById } from "../../services/postsApiCalls";
 import { useAuth } from "../../contexts/AuthContext";
 import "./PostDetails.css";
 
-const EditPostPage = () => {
-  const { postId } = useParams();
+const PostDetails = () => {
   const [post, setPost] = useState({
+    _id: "",
     title: "",
     description: "",
     user_id: { username: "" },
@@ -17,9 +17,8 @@ const EditPostPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const { postId } = useParams();
   const { passport } = useAuth();
-
-  console.log(passport);
 
   const navigate = useNavigate();
 
@@ -38,7 +37,20 @@ const EditPostPage = () => {
     if (postId) {
       loadPost();
     }
-  }, [postId]);
+  }, [postId, post]);
+
+  const onLikePost = async (
+    token: string,
+    postId: string,
+    currentLikes: string[]
+  ) => {
+    try {
+      const updatedPost = await likePostById(token, postId, currentLikes);
+      setPost({ ...post, likes: updatedPost.likes });
+    } catch (error) {
+      console.error("Error handling like:", error);
+    }
+  };
 
   const handleCancel = () => {
     navigate(-1);
@@ -57,18 +69,30 @@ const EditPostPage = () => {
   }
 
   return (
-    <div className="editpost-page">
-      <div className="editpost-container">
+    <div className="postdetails-page">
+      <div className="postdetails-container">
         <h1>Post Details</h1>
-        <p>{post.user_id.username}</p>
-        <p>{post.title}</p>
-        <p>{post.likes.length} likes</p>
-        <p>{post.description}</p>
-        <p>
+        <div className="username-title-likes">
+          <div className="username-title">
+            <div className="username">{post.user_id.username}</div>
+            <div className="detail-title bold">{post.title}</div>
+          </div>
+          <div
+            className="likes"
+            onClick={() => onLikePost(passport!.token, post._id, post.likes)}
+          >
+            likes: {post.likes.length}
+          </div>
+        </div>
+        <div className="description">{post.description}</div>
+        <div className="likedby">
+          <div>Liked by:</div>
           {post.likedby.map((user: any) => (
-            <div>{user}</div>
+            <ul key={user}>
+              <li>{user}</li>
+            </ul>
           ))}
-        </p>
+        </div>
         <button id="back-button" type="button" onClick={handleCancel}>
           Go Back
         </button>
@@ -77,4 +101,4 @@ const EditPostPage = () => {
   );
 };
 
-export default EditPostPage;
+export default PostDetails;

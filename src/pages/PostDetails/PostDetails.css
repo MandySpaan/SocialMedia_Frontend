@@ -1,0 +1,45 @@
+.postdetails-page {
+    background-color: rgb(255, 255, 218);
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+
+}
+
+.postdetails-container {
+    background-color: rgb(252, 252, 196);
+    border-color: #ffca37;
+    border-style: solid;
+    border-width: 0.1em;
+    border-radius: 0.5em;
+
+    margin-top: 5em;
+    padding: 2em 3em;
+    width: 30em;
+    height: fit-content;
+
+    h1 {
+        margin-top: 0;
+        margin-bottom: 0.5em;
+    }
+
+    .likedby {
+        margin-top: 1em;
+    }
+
+    li {
+        margin-top: -1em;
+        }
+
+    #back-button {
+        border: solid 0.1em rgb(124, 124, 124);
+        padding: 0.5em;
+        width: fit-content;
+    }
+}
+
+.username-title-likes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
