@@ -29,17 +29,14 @@
 
     li {
         margin-top: -1em;
+        margin-bottom: -1em;
         }
 
     #back-button {
         border: solid 0.1em rgb(124, 124, 124);
         padding: 0.5em;
+        margin-top: 1.5em;;
         width: fit-content;
     }
 }
 
-.username-title-likes {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1em;
-}

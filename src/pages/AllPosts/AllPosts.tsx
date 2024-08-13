@@ -52,15 +52,17 @@ const AllPosts = () => {
                 likes: string[];
               }) => (
                 <div className="allposts-container" key={post._id}>
-                  <div className="username">{post.user_id.username}</div>
-                  <div className="title-likes">
-                    <div
-                      className="title bold"
-                      onClick={() => {
-                        navigate(`/post-details/${post._id}`);
-                      }}
-                    >
-                      {post.title}
+                  <div className="username-title-likes">
+                    <div className="username-title">
+                      <div className="username">{post.user_id.username}</div>
+                      <div
+                        className="title bold"
+                        onClick={() => {
+                          navigate(`/post-details/${post._id}`);
+                        }}
+                      >
+                        {post.title}
+                      </div>
                     </div>
                     <div
                       className="likes"

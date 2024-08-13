@@ -39,3 +39,9 @@ h1 {
 .likes:hover {
     cursor: pointer;
 }
+
+.username-title-likes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}

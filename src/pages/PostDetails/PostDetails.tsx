@@ -85,7 +85,7 @@ const PostDetails = () => {
           </div>
         </div>
         <div className="description">{post.description}</div>
-        <div className="likedby">
+        <div className={post.likes.length > 0 ? "likedby" : "hidden"}>
           <div>Liked by:</div>
           {post.likedby.map((user: any) => (
             <ul key={user}>
