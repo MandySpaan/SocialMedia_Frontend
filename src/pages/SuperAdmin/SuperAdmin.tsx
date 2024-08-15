@@ -3,7 +3,7 @@ import "./SuperAdmin.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../services/userApiCalls";
-import { getAllPosts } from "../../services/postsApiCalls";
+import { deletePostByIdAdmin, getAllPosts } from "../../services/postsApiCalls";
 
 const SuperAdmin = () => {
   const [users, setUsers] = useState([]);
@@ -41,6 +41,12 @@ const SuperAdmin = () => {
 
     bringAllPosts();
   }, []);
+
+  const deletePostHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = e.currentTarget.name;
+    await deletePostByIdAdmin(passport!.token, id);
+    setPosts((prevPosts) => prevPosts.filter((post: any) => post._id !== id));
+  };
 
   return (
     <div className="superadmin-page">
@@ -97,7 +103,9 @@ const SuperAdmin = () => {
                         {post.title}
                       </div>
                     </div>
-                    <button>Delete Post</button>
+                    <button onClick={deletePostHandler} name={post._id}>
+                      Delete Post
+                    </button>
                   </div>
                 )
               )}

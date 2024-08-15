@@ -42,6 +42,18 @@ export const deletePostById = async (token: string, id: string) => {
   return await response.json();
 };
 
+export const deletePostByIdAdmin = async (token: string, id: string) => {
+  const response = await fetch(`${URL}/api/posts/admin/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+};
+
 export const getPostById = async (postId: string): Promise<any> => {
   try {
     const response = await fetch(`${URL}/api/posts/${postId}`);
