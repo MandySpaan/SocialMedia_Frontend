@@ -7,6 +7,7 @@ import PostDetails from "../pages/PostDetails/PostDetails";
 import Profile from "../pages/Profile/Profile";
 import CreatePost from "../pages/CreatePost/CreatePost";
 import EditPost from "../pages/EditPost/EditPost";
+import SuperAdmin from "../pages/SuperAdmin/SuperAdmin";
 
 function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ function AppRoutes() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-post/:postId" element={<EditPost />} />
+        <Route path="/super-admin" element={<SuperAdmin />} />
       </Routes>
     </>
   );

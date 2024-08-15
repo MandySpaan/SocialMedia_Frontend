@@ -21,7 +21,11 @@ const Login = () => {
 
   useEffect(() => {
     if (passport && passport.token) {
-      navigate("/");
+      if (passport.tokenData.role === "super_admin") {
+        navigate("/super-admin");
+      } else {
+        navigate("/");
+      }
     }
   }, [passport]);
 
