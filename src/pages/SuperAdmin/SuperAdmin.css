@@ -1,12 +1,58 @@
 .superadmin-page {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .sa-instructions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sa-instructions-return {
     width: 45em;
     font-size: 0.8em;
     text-align: center;
     color: #333;
+}
+
+.sa-users-posts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 2em;
+}
+
+.sa-users-card, .sa-posts-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em;
+}
+
+.sa-username {
+    padding: 0.5em;
+}
+
+.sa-title {
+    padding: 0.5em;
+    margin-top: -1em;
+    cursor: pointer;
+}
+
+.sa-users-card:hover, .sa-posts-card:hover {
+    background-color: white;
+    border: 0.1em solid #333;
+    border-radius: 0.3em;
+}
+
+button {
+    height: fit-content;
+    margin: 0.5em;
+}
+
+button:hover {
+    background-color: red;
+    color: white;
 }

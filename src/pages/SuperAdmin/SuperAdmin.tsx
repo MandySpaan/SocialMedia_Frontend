@@ -45,61 +45,65 @@ const SuperAdmin = () => {
   return (
     <div className="superadmin-page">
       <h1>Welcome Super Admin</h1>
-      <h3>On this page you can delete users and posts</h3>
-      <div>
-        If you want to visit GeekTok as a user{" "}
-        <NavLink to={"/"}>click here</NavLink>
-      </div>
       <div className="sa-instructions">
-        You can always return to the super admin view by going to
-        geektok.com/super-admin <br /> or get automatically forwarded by simply
-        logging out and logging in again
+        <h3>On this page you can delete users and posts</h3>
+        <div>
+          If you want to visit GeekTok as a user{" "}
+          <NavLink to={"/"}>click here</NavLink>
+        </div>
+        <div className="sa-instructions-return">
+          You can always return to the super admin view by going to
+          geektok.com/super-admin <br /> or get automatically forwarded by
+          simply logging out and logging in again
+        </div>
       </div>
-      <div className="sa-allusers">
-        <h2>All Users</h2>
-        {users.length === 0 ? (
-          <p>No users found...</p>
-        ) : (
-          <div className="sa-allusers-container">
-            {users.map((user: { _id: string; username: string }) => (
-              <div className="all-users-card" key={user._id}>
-                <div className="username">{user.username}</div>
-                <button>Delete User</button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <div className="sa-allposts">
-        <h2>All Posts</h2>
-        {posts.length === 0 ? (
-          <p>No posts found...</p>
-        ) : (
-          <div className="sa-allposts-container">
-            {posts.map(
-              (post: {
-                _id: string;
-                user_id: { username: string };
-                title: string;
-              }) => (
-                <div className="all-posts-card" key={post._id}>
-                  <div className="username-title">
-                    <div className="username">{post.user_id.username}</div>
-                    <div
-                      className="title bold"
-                      onClick={() => {
-                        navigate(`/post-details/${post._id}`);
-                      }}
-                    >
-                      {post.title}
-                    </div>
-                  </div>
-                  <button>Delete Post</button>
+      <div className="sa-users-posts">
+        <div className="sa-allusers">
+          <h2>All Users</h2>
+          {users.length === 0 ? (
+            <p>No users found...</p>
+          ) : (
+            <div className="sa-allusers-container">
+              {users.map((user: { _id: string; username: string }) => (
+                <div className="sa-users-card" key={user._id}>
+                  <div className="sa-username">{user.username}</div>
+                  <button>Delete User</button>
                 </div>
-              )
-            )}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="sa-allposts">
+          <h2>All Posts</h2>
+          {posts.length === 0 ? (
+            <p>No posts found...</p>
+          ) : (
+            <div className="sa-allposts-container">
+              {posts.map(
+                (post: {
+                  _id: string;
+                  user_id: { username: string };
+                  title: string;
+                }) => (
+                  <div className="sa-posts-card" key={post._id}>
+                    <div className="sa-username-title">
+                      <div className="sa-username">{post.user_id.username}</div>
+                      <div
+                        className="sa-title bold"
+                        onClick={() => {
+                          navigate(`/post-details/${post._id}`);
+                        }}
+                      >
+                        {post.title}
+                      </div>
+                    </div>
+                    <button>Delete Post</button>
+                  </div>
+                )
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
