@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./SuperAdmin.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../services/userApiCalls";
+import { deleteUserByIdAdmin, getAllUsers } from "../../services/userApiCalls";
 import { deletePostByIdAdmin, getAllPosts } from "../../services/postsApiCalls";
 
 const SuperAdmin = () => {
@@ -40,7 +40,13 @@ const SuperAdmin = () => {
     };
 
     bringAllPosts();
-  }, []);
+  }, [users, posts]);
+
+  const deleteUserHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const id = e.currentTarget.name;
+    await deleteUserByIdAdmin(passport!.token, id);
+    setUsers((prevUsers) => prevUsers.filter((user: any) => user._id !== id));
+  };
 
   const deletePostHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const id = e.currentTarget.name;
@@ -73,7 +79,9 @@ const SuperAdmin = () => {
               {users.map((user: { _id: string; username: string }) => (
                 <div className="sa-users-card" key={user._id}>
                   <div className="sa-username">{user.username}</div>
-                  <button>Delete User</button>
+                  <button onClick={deleteUserHandler} name={user._id}>
+                    Delete User
+                  </button>
                 </div>
               ))}
             </div>

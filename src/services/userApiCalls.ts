@@ -12,6 +12,18 @@ export const getAllUsers = async (token: string) => {
   return await response.json();
 };
 
+export const deleteUserByIdAdmin = async (token: string, id: string) => {
+  const response = await fetch(`${URL}/api/users/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+};
+
 export const getMyProfile = async (token: string) => {
   const response = await fetch(`${URL}/api/users/profile`, {
     method: "GET",
