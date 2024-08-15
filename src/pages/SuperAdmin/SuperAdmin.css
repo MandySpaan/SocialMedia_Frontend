@@ -1,0 +1,12 @@
+.superadmin-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sa-instructions {
+    width: 45em;
+    font-size: 0.8em;
+    text-align: center;
+    color: #333;
+}
