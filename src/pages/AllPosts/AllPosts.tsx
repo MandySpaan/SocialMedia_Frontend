@@ -54,7 +54,10 @@ const AllPosts = () => {
                 <div className="allposts-container" key={post._id}>
                   <div className="username-title-likes">
                     <div className="username-title">
-                      <div className="username">{post.user_id.username}</div>
+                      <div className="username-follow">
+                        <div className="username">{post.user_id.username}</div>
+                        <div className="follow">{"Follow"}</div>
+                      </div>
                       <div
                         className="title bold"
                         onClick={() => {

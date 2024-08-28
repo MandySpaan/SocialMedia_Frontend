@@ -45,3 +45,22 @@ h1 {
     justify-content: space-between;
     margin-bottom: 1em;
 }
+
+.username-follow {
+    display: flex;
+}
+
+.follow {
+    color: rgb(90, 90, 90);
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    margin-top: 0.1em;
+    margin-left: 1em;
+}
+
+.follow:hover {
+    cursor: pointer;
+    color: darkgreen
+}
