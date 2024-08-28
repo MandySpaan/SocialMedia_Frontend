@@ -55,7 +55,7 @@ const AllPosts = () => {
             {posts.map(
               (post: {
                 _id: string;
-                user_id: { username: string };
+                user_id: { username: string; _id: string };
                 title: string;
                 description: string;
                 likes: string[];
@@ -70,7 +70,7 @@ const AllPosts = () => {
                           onClick={() =>
                             onFollowUser(
                               passport!.token,
-                              post.user_id.username,
+                              post.user_id._id,
                               passport!.tokenData.following
                             )
                           }
