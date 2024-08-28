@@ -8,8 +8,6 @@ export const handleFollowUser = async (
 ) => {
   try {
     const updatedFollow = await followUser(token, userId, currentFollowing);
-
-    console.log(updatedFollow.data);
     updateFollow((prevFollow: any) =>
       prevFollow.map((follow: any) =>
         follow._id === userId
@@ -19,7 +17,6 @@ export const handleFollowUser = async (
     );
 
     const myProfile = await getMyProfile(token);
-    console.log(myProfile.data.following);
     const passport = JSON.parse(localStorage.getItem("passport") || "{}");
 
     if (passport && passport.tokenData) {
