@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFollowingProfiles } from "../../services/userApiCalls";
 import { useAuth } from "../../contexts/AuthContext";
+import "./FollowingProfiles.css";
 
 const FollowingProfiles = () => {
   const [users, setUsers] = useState([]);
@@ -19,16 +20,18 @@ const FollowingProfiles = () => {
     bringFollowingProfiles();
   }, [passport]);
   return (
-    <div>
-      Following:
+    <div className="following-box">
+      <h2>Following</h2>
       <ul>
         {users.map((user: any) => (
-          <div key={user._id}>
+          <div key={user._id} className="following">
             <div>{user.username}</div>
-            <div>
-              {user.first_name} {user.last_name}
+            <div className="fullname">
+              {user.first_name || user.last_name
+                ? `(${user.first_name} ${user.last_name})`
+                : null}
             </div>
-            <div>{user.description}</div>
+            <div className="description">{user.description}</div>
           </div>
         ))}
       </ul>
