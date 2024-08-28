@@ -6,6 +6,7 @@ import { handleLikePost } from "../../utils/postUtils";
 import { handleFollowUser } from "../../utils/userUtils";
 import Navbar from "../../components/Navbar/Navbar";
 import "./AllPosts.css";
+import { getMyProfile } from "../../services/userApiCalls";
 
 const AllPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -24,6 +25,16 @@ const AllPosts = () => {
     };
 
     bringAllPosts();
+  }, []);
+
+  useEffect(() => {
+    const bringMyFollowing = async () => {
+      if (passport?.token) {
+        const myProfile = await getMyProfile(passport.token);
+        setFollowing(myProfile.data.following);
+      }
+    };
+    bringMyFollowing();
   }, []);
 
   useEffect(() => {
