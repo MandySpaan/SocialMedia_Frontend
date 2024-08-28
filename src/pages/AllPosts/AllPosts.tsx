@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { getAllPosts } from "../../services/postsApiCalls";
-import Navbar from "../../components/Navbar/Navbar";
 import { handleLikePost } from "../../utils/postUtils";
+import { handleFollowUser } from "../../utils/userUtils";
+import Navbar from "../../components/Navbar/Navbar";
 import "./AllPosts.css";
 
 const AllPosts = () => {
@@ -25,6 +26,14 @@ const AllPosts = () => {
 
     bringAllPosts();
   }, []);
+
+  const onFollowUser = (
+    token: string,
+    userId: string,
+    currentFollowing: string[]
+  ) => {
+    handleFollowUser(token, userId, currentFollowing, setPosts);
+  };
 
   const onLikePost = (
     token: string,
@@ -56,7 +65,18 @@ const AllPosts = () => {
                     <div className="username-title">
                       <div className="username-follow">
                         <div className="username">{post.user_id.username}</div>
-                        <div className="follow">{"Follow"}</div>
+                        <div
+                          className="follow"
+                          onClick={() =>
+                            onFollowUser(
+                              passport!.token,
+                              post.user_id.username,
+                              passport!.tokenData.following
+                            )
+                          }
+                        >
+                          {"Follow"}
+                        </div>
                       </div>
                       <div
                         className="title bold"

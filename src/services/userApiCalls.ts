@@ -48,3 +48,20 @@ export const updateProfile = async (changes: any, token: string) => {
 
   return await response.json();
 };
+
+export const followUser = async (
+  token: string,
+  userId: string,
+  currentFollowing: string[]
+) => {
+  const response = await fetch(`${URL}/api/users/follow/${userId}`, {
+    method: "PUT",
+    headers: {
+      "content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ following: currentFollowing }),
+  });
+
+  return await response.json();
+};
