@@ -50,7 +50,7 @@ h1 {
     display: flex;
 }
 
-.follow {
+.follow, .unfollow {
     color: rgb(90, 90, 90);
     font-family: Arial, sans-serif;
     font-style: italic;
@@ -63,4 +63,9 @@ h1 {
 .follow:hover {
     cursor: pointer;
     color: darkgreen
+}
+
+.unfollow:hover {
+    cursor: pointer;
+    color: darkred
 }
