@@ -1,5 +1,17 @@
 const URL = "http://localhost:4000";
 
+export const getFollowingProfiles = async (token: string) => {
+  const response = await fetch(`${URL}/api/users/following/profiles`, {
+    method: "GET",
+    headers: {
+      "content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+};
+
 export const getAllUsers = async (token: string) => {
   const response = await fetch(`${URL}/api/users`, {
     method: "GET",

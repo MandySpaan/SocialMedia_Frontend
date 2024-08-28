@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
+import FollowingProfiles from "../../components/FollowingProfiles/FollowingProfiles";
 
 const Home = () => {
   const { passport } = useAuth();
@@ -17,6 +18,7 @@ const Home = () => {
     <div>
       <Navbar />
       <h1>Home</h1>
+      <FollowingProfiles />
     </div>
   );
 };
