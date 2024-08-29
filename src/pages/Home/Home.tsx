@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import FollowingProfiles from "../../components/FollowingProfiles/FollowingProfiles";
 import FollowingPosts from "../../components/FollowingPosts/FollowingPosts";
 import { getFollowingPosts } from "../../services/postsApiCalls";
-import { getFollowingProfiles } from "../../services/userApiCalls";
+import { getFollowingProfiles, followUser } from "../../services/userApiCalls";
 import "./Home.css";
 
 interface User {
@@ -55,11 +55,36 @@ const Home = () => {
     fetchData();
   }, [passport]);
 
-  const handleUnfollowUser = (userId: string) => {
-    setPosts((prevPosts) =>
-      prevPosts.filter((post) => post.user_id._id !== userId)
-    );
-    setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+  const handleUnfollowUser = async (userId: string) => {
+    if (!passport || !passport.token) {
+      console.error("No token found");
+      return;
+    }
+
+    try {
+      const tokenData =
+        JSON.parse(localStorage.getItem("passport") || "{}").tokenData || {};
+      const currentFollowing = tokenData.following || [];
+
+      const updatedFollowing = currentFollowing.filter(
+        (id: string) => id !== userId
+      );
+      tokenData.following = updatedFollowing;
+
+      localStorage.setItem(
+        "passport",
+        JSON.stringify({ ...passport, tokenData })
+      );
+
+      setPosts((prevPosts) =>
+        prevPosts.filter((post) => post.user_id._id !== userId)
+      );
+      setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+
+      await followUser(passport.token, userId, updatedFollowing);
+    } catch (error) {
+      console.error("Error updating following:", error);
+    }
   };
 
   return (
@@ -67,7 +92,7 @@ const Home = () => {
       <Navbar />
       <h1>Your Geek Feed</h1>
       <div className="home-page">
-        <FollowingProfiles users={users} />
+        <FollowingProfiles users={users} onUnfollowUser={handleUnfollowUser} />
         <FollowingPosts
           posts={posts}
           onUnfollowUser={handleUnfollowUser}

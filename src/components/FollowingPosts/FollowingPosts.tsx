@@ -1,8 +1,6 @@
-import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { handleLikePost } from "../../utils/postUtils";
 import "./FollowingPosts.css";
-import { handleFollowUser } from "../../utils/userUtils";
 
 interface User {
   _id: string;
@@ -33,23 +31,6 @@ const FollowingPosts: React.FC<FollowingPostsProps> = ({
 }) => {
   const { passport } = useAuth();
 
-  const onFollowUser = async (userId: string) => {
-    const currentFollowing = posts.map((post) => post.user_id._id);
-
-    await handleFollowUser(
-      passport!.token,
-      userId,
-      currentFollowing,
-      (_updatedFollowing: any) => {
-        const updatedPosts = posts.filter(
-          (post) => post.user_id._id !== userId
-        );
-        setPosts(updatedPosts);
-        onUnfollowUser(userId);
-      }
-    );
-  };
-
   const onLikePost = async (postId: string, currentLikes: string[]) => {
     await handleLikePost(
       passport!.token,
@@ -74,7 +55,7 @@ const FollowingPosts: React.FC<FollowingPostsProps> = ({
 
                   <div
                     className="unfollow"
-                    onClick={() => onFollowUser(post.user_id._id)}
+                    onClick={() => onUnfollowUser(post.user_id._id)}
                   >
                     {"Unfollow"}
                   </div>

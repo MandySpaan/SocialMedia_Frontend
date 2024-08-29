@@ -10,16 +10,28 @@ interface User {
 
 interface FollowingProfilesProps {
   users: User[];
+  onUnfollowUser: (userId: string) => void;
 }
 
-const FollowingProfiles = ({ users }: FollowingProfilesProps) => {
+const FollowingProfiles = ({
+  users,
+  onUnfollowUser,
+}: FollowingProfilesProps) => {
   return (
     <div className="following-box">
       <h2>Following</h2>
       <ul>
         {users.map((user) => (
           <div key={user._id} className="following">
-            <div>{user.username}</div>
+            <div className="username-follow">
+              <div>{user.username}</div>
+              <div
+                className="unfollow"
+                onClick={() => onUnfollowUser(user._id)}
+              >
+                {"Unfollow"}
+              </div>
+            </div>
             <div className="fullname">
               {user.first_name || user.last_name
                 ? `(${user.first_name} ${user.last_name})`
