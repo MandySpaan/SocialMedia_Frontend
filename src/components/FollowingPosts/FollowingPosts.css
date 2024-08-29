@@ -13,7 +13,7 @@
         margin-bottom: 0;
     }
 
-    .followingposts {
+    .followingposts-container {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
@@ -28,7 +28,6 @@
         border: rgb(126, 126, 126) 0.1em solid;
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
         width: 24em;
         padding: 1em;
         margin: 1em;
