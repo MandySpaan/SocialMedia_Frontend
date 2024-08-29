@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { getFollowingPosts } from "../../services/postsApiCalls";
 import { handleLikePost } from "../../utils/postUtils";
 import "./FollowingPosts.css";
+import { handleFollowUser } from "../../utils/userUtils";
 
 const FollowingPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -19,7 +20,17 @@ const FollowingPosts = () => {
     };
 
     bringFollowingPosts();
-  }, [passport]);
+  }, [passport, posts]);
+
+  const onFollowUser = async (
+    token: string,
+    userId: string,
+    currentFollowing: string[]
+  ) => {
+    await handleFollowUser(token, userId, currentFollowing, setPosts);
+
+    setPosts((prevPosts) => prevPosts.filter((id) => id !== userId));
+  };
 
   const onLikePost = (
     token: string,
@@ -40,8 +51,15 @@ const FollowingPosts = () => {
                 <div className="username-follow">
                   <div className="username">{post.user_id.username}</div>
 
-                  <div className="unfollow">Unfollow</div>
-                </div>{" "}
+                  <div
+                    className="unfollow"
+                    onClick={() =>
+                      onFollowUser(passport!.token, post.user_id._id, posts)
+                    }
+                  >
+                    {"Unfollow"}
+                  </div>
+                </div>
                 <div className="title bold">{post.title}</div>
               </div>
               <div
