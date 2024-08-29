@@ -1,29 +1,23 @@
-import { useEffect, useState } from "react";
-import { getFollowingProfiles } from "../../services/userApiCalls";
-import { useAuth } from "../../contexts/AuthContext";
 import "./FollowingProfiles.css";
 
-const FollowingProfiles = () => {
-  const [users, setUsers] = useState([]);
-  const { passport } = useAuth();
+interface User {
+  _id: string;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  description?: string;
+}
 
-  useEffect(() => {
-    const bringFollowingProfiles = async () => {
-      try {
-        const response = await getFollowingProfiles(passport!.token);
-        setUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
+interface FollowingProfilesProps {
+  users: User[];
+}
 
-    bringFollowingProfiles();
-  }, [passport]);
+const FollowingProfiles = ({ users }: FollowingProfilesProps) => {
   return (
     <div className="following-box">
       <h2>Following</h2>
       <ul>
-        {users.map((user: any) => (
+        {users.map((user) => (
           <div key={user._id} className="following">
             <div>{user.username}</div>
             <div className="fullname">

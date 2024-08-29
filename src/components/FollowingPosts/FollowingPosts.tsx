@@ -1,50 +1,71 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { getFollowingPosts } from "../../services/postsApiCalls";
 import { handleLikePost } from "../../utils/postUtils";
 import "./FollowingPosts.css";
 import { handleFollowUser } from "../../utils/userUtils";
 
-const FollowingPosts = () => {
-  const [posts, setPosts] = useState([]);
+interface User {
+  _id: string;
+  username: string;
+  first_name?: string;
+  last_name?: string;
+  description?: string;
+}
+
+interface Post {
+  _id: string;
+  title: string;
+  description: string;
+  likes: string[];
+  user_id: User;
+}
+
+interface FollowingPostsProps {
+  posts: Post[];
+  onUnfollowUser: (userId: string) => void;
+  setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
+}
+
+const FollowingPosts = ({
+  posts,
+  onUnfollowUser,
+  setPosts,
+}: FollowingPostsProps) => {
   const { passport } = useAuth();
 
-  useEffect(() => {
-    const bringFollowingPosts = async () => {
-      try {
-        const response = await getFollowingPosts(passport!.token);
-        setPosts(response.data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
+  const onFollowUser = async (userId: string) => {
+    const currentFollowing = posts.map((post) => post.user_id._id);
+    await handleFollowUser(
+      passport!.token,
+      userId,
+      currentFollowing,
+      (updatedFollowing: any) => {
+        // Update the posts state with the new following list
+        const updatedPosts = posts.filter(
+          (post) => post.user_id._id !== userId
+        );
+        setPosts(updatedPosts);
+        onUnfollowUser(userId);
       }
-    };
-
-    bringFollowingPosts();
-  }, [passport, posts]);
-
-  const onFollowUser = async (
-    token: string,
-    userId: string,
-    currentFollowing: string[]
-  ) => {
-    await handleFollowUser(token, userId, currentFollowing, setPosts);
-
-    setPosts((prevPosts) => prevPosts.filter((id) => id !== userId));
+    );
   };
 
-  const onLikePost = (
-    token: string,
-    postId: string,
-    currentLikes: string[]
-  ) => {
-    handleLikePost(token, postId, currentLikes, setPosts);
+  const onLikePost = async (postId: string, currentLikes: string[]) => {
+    await handleLikePost(
+      passport!.token,
+      postId,
+      currentLikes,
+      (updatedPosts: any) => {
+        // Update the posts state with the new like status
+        setPosts(updatedPosts);
+      }
+    );
   };
 
   return (
     <div className="followingposts-box">
       <h2>Posts by Following</h2>
       <div className="followingposts-container">
-        {posts.map((post: any) => (
+        {posts.map((post) => (
           <div key={post._id} className="post">
             <div className="username-title-likes">
               <div className="username-title">
@@ -53,9 +74,7 @@ const FollowingPosts = () => {
 
                   <div
                     className="unfollow"
-                    onClick={() =>
-                      onFollowUser(passport!.token, post.user_id._id, posts)
-                    }
+                    onClick={() => onFollowUser(post.user_id._id)}
                   >
                     {"Unfollow"}
                   </div>
@@ -64,9 +83,7 @@ const FollowingPosts = () => {
               </div>
               <div
                 className="likes"
-                onClick={() =>
-                  onLikePost(passport!.token, post._id, post.likes)
-                }
+                onClick={() => onLikePost(post._id, post.likes)}
               >
                 likes: {post.likes.length}
               </div>
