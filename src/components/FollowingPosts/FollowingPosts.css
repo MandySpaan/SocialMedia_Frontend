@@ -32,4 +32,8 @@
         padding: 1em;
         margin: 1em;
     }
+
+    .no-following {
+        margin-top: -1em;
+    }
 }

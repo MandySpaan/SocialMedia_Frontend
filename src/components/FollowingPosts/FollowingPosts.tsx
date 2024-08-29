@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { handleLikePost } from "../../utils/postUtils";
 import "./FollowingPosts.css";
@@ -72,6 +73,10 @@ const FollowingPosts: React.FC<FollowingPostsProps> = ({
             <div className="description">{post.description}</div>
           </div>
         ))}
+      </div>
+      <div className={posts.length > 0 ? "hidden" : "no-following"}>
+        To find people to follow, go to{" "}
+        <NavLink to="/all-posts">All Posts</NavLink>.
       </div>
     </div>
   );

@@ -27,7 +27,21 @@
     }
 }
 
+.following-container {
+    margin-top: 1em;
+    margin-left: 2.4em;
+    margin-bottom: 1em;
+}
+
 .following {
     margin-bottom: 1em;
     padding-right: 2em;
+}
+
+.no-following {
+    font-size: 1.2em;
+    color: rgb(41, 41, 41);
+    margin-top: -1.6em;
+    margin-left: 2em;
+    margin-bottom: 1em;
 }

@@ -20,7 +20,7 @@ const FollowingProfiles = ({
   return (
     <div className="following-box">
       <h2>Following</h2>
-      <ul>
+      <div className="following-container">
         {users.map((user) => (
           <div key={user._id} className="following">
             <div className="username-follow">
@@ -40,7 +40,10 @@ const FollowingProfiles = ({
             <div className="description">{user.description}</div>
           </div>
         ))}
-      </ul>
+      </div>
+      <div className={users.length > 0 ? "hidden" : "no-following"}>
+        You are not following anyone.
+      </div>
     </div>
   );
 };
