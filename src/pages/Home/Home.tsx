@@ -3,6 +3,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useEffect } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import FollowingProfiles from "../../components/FollowingProfiles/FollowingProfiles";
+import FollowingPosts from "../../components/FollowingPosts/FollowingPosts";
+import "./Home.css";
 
 const Home = () => {
   const { passport } = useAuth();
@@ -15,11 +17,14 @@ const Home = () => {
   }, [passport, navigate]);
 
   return (
-    <div>
+    <>
       <Navbar />
-      <h1>Home</h1>
-      <FollowingProfiles />
-    </div>
+      <h1>Your Geek Feed</h1>
+      <div className="home-page">
+        <FollowingProfiles />
+        <FollowingPosts />
+      </div>
+    </>
   );
 };
 
