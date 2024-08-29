@@ -1,3 +1,4 @@
+import React from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { handleLikePost } from "../../utils/postUtils";
 import "./FollowingPosts.css";
@@ -25,21 +26,21 @@ interface FollowingPostsProps {
   setPosts: React.Dispatch<React.SetStateAction<Post[]>>;
 }
 
-const FollowingPosts = ({
+const FollowingPosts: React.FC<FollowingPostsProps> = ({
   posts,
   onUnfollowUser,
   setPosts,
-}: FollowingPostsProps) => {
+}) => {
   const { passport } = useAuth();
 
   const onFollowUser = async (userId: string) => {
     const currentFollowing = posts.map((post) => post.user_id._id);
+
     await handleFollowUser(
       passport!.token,
       userId,
       currentFollowing,
-      (updatedFollowing: any) => {
-        // Update the posts state with the new following list
+      (_updatedFollowing: any) => {
         const updatedPosts = posts.filter(
           (post) => post.user_id._id !== userId
         );
@@ -55,7 +56,6 @@ const FollowingPosts = ({
       postId,
       currentLikes,
       (updatedPosts: any) => {
-        // Update the posts state with the new like status
         setPosts(updatedPosts);
       }
     );
