@@ -7,12 +7,12 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    email: "",
+    identifier: "",
     password: "",
   });
 
   interface Credentials {
-    email: string;
+    identifier: string;
     password: string;
   }
 
@@ -68,9 +68,9 @@ const Login = () => {
       <div className="login-container">
         <input
           type="text"
-          name="email"
-          id="email"
-          placeholder="Email"
+          name="identifier"
+          id="identifier"
+          placeholder="Email or Username"
           onChange={handleChange}
           autoComplete="email"
         />
