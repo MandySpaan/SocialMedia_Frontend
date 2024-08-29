@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { getFollowingPosts } from "../../services/postsApiCalls";
+import { handleLikePost } from "../../utils/postUtils";
 import "./FollowingPosts.css";
 
 const FollowingPosts = () => {
@@ -19,6 +20,15 @@ const FollowingPosts = () => {
 
     bringFollowingPosts();
   }, [passport]);
+
+  const onLikePost = (
+    token: string,
+    postId: string,
+    currentLikes: string[]
+  ) => {
+    handleLikePost(token, postId, currentLikes, setPosts);
+  };
+
   return (
     <div className="followingposts-box">
       <h2>Posts by Following</h2>
@@ -34,7 +44,14 @@ const FollowingPosts = () => {
                 </div>{" "}
                 <div className="title bold">{post.title}</div>
               </div>
-              <div className="likes">Likes:</div>
+              <div
+                className="likes"
+                onClick={() =>
+                  onLikePost(passport!.token, post._id, post.likes)
+                }
+              >
+                likes: {post.likes.length}
+              </div>
             </div>
             <div className="description">{post.description}</div>
           </div>
