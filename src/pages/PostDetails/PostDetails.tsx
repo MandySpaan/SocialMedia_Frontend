@@ -93,9 +93,11 @@ const PostDetails = () => {
             </ul>
           ))}
         </div>
-        <button id="back-button" type="button" onClick={handleCancel}>
-          Go Back
-        </button>
+        <div className="back-button">
+          <button id="back-button" type="button" onClick={handleCancel}>
+            Go Back
+          </button>
+        </div>
       </div>
     </div>
   );

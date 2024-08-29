@@ -32,6 +32,10 @@
         margin-bottom: -1em;
         }
 
+    .back-button {
+        display: flex;
+        justify-content: center;
+    }
     #back-button {
         border: solid 0.1em rgb(124, 124, 124);
         padding: 0.5em;
