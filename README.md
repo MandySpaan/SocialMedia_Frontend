@@ -1,30 +1,93 @@
-# React + TypeScript + Vite
+# Social Media React Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project was made as part of a course Full Stack Developer for GeeksHubs Academy.
 
-Currently, two official plugins are available:
+## Index 🔍
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Assignment](#assignment-)
+- [Stack](#stack)
+- [Local Installation](#local-installation-️)
+- [Points of Improvement](#points-of-improvement)
 
-## Expanding the ESLint configuration
+## Assignment 📝
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+GeeksHub gave the following fictive assignment: to create the frontend part of the earlier created backend for a fictional social media. You can find the backend project here: [GH_P5_SocialMedia_Backend](https://github.com/MandySpaan/GH_P5_SocialMedia_Backend)
 
-- Configure the top-level `parserOptions` property like this:
+The requirements for the website include:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Registration and login
+- An editable user profile
+- Option to create a post
+- Possibility to see, modify or delete your posts
+- View to see all posts
+- Option to see a post in detail
+- Functionality to give and remove likes from posts
+- A view for an admin to manage users and posts
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Included extras:
+
+- Functionality that allows users to follow others
+- View that show only the posts from the users you follow
+- View of the profiles of the users you follow
+
+## Stack 💻
+
+<div align="center">
+<a href="https://www.reactjs.com/">
+    <img src= "https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+</a>
+<a href="https://www.typescriptlang.org/">
+    <img src= "https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/>
+</a>
+<a href="https://nodejs.org/es/">
+    <img src= "https://img.shields.io/badge/node.js-026E00?style=for-the-badge&logo=node.js&logoColor=white" alt="Node JS"/>
+</a>
+<a href="">
+    <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" alt="JWT" />
+</a>
+<a href="">
+    <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="NPM" />
+</a>
+<a href="">
+    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
+</a>
+<a href="">
+    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
+</a>
+<a href="">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="Github" />
+</a>
+<a href="">
+    <img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
+</a>
+ </div>
+
+## Local installation 🛠️
+
+### Backend
+
+You can find the backend project here: [GH_P5_SocialMedia_Backend](https://github.com/MandySpaan/GH_P5_SocialMedia_Backend)
+
+1. Clone the repository
+   `$ git clone https://github.com/MandySpaan/GH_P5_SocialMedia_Backend`
+2. Install dependencies
+   `$ npm install --y`
+3. Start Express on the server
+   `$ npm run dev`
+4. Run migrations
+   `$ npm run run-migrations`
+
+### Frontend
+
+1. Clone the repository
+   `$ git clone https://github.com/MandySpaan/GH_P7_SocialMedia_Frontend`
+2. Install dependencies
+   `$ npm install --y`
+3. Start Express on the server
+   `$ npm run dev`
+
+## Points of Improvement 💡
+
+- Improve overal design of the website
+- Improve responsive design
+- Improve error handling
