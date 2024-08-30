@@ -72,10 +72,11 @@ You can find the backend project here: [GH_P5_SocialMedia_Backend](https://githu
    `$ git clone https://github.com/MandySpaan/GH_P5_SocialMedia_Backend`
 2. Install dependencies
    `$ npm install --y`
-3. Start Express on the server
+3. Copy the file .env.example, change the name to .env and fill in all the fields
+4. Plant the seeds into the tables
+   `$ npm run db:seed`
+5. Start the server
    `$ npm run dev`
-4. Run migrations
-   `$ npm run run-migrations`
 
 ### Frontend
 
@@ -83,7 +84,7 @@ You can find the backend project here: [GH_P5_SocialMedia_Backend](https://githu
    `$ git clone https://github.com/MandySpaan/GH_P7_SocialMedia_Frontend`
 2. Install dependencies
    `$ npm install --y`
-3. Start Express on the server
+3. Start the server
    `$ npm run dev`
 
 ## Points of Improvement 💡
