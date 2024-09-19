@@ -11,7 +11,7 @@ This project was made as part of a course Full Stack Developer for GeeksHubs Aca
 
 ## Assignment 📝
 
-GeeksHub gave the following fictive assignment: to create the frontend part of the earlier created backend for a fictional social media. You can find the backend project here: [GH_P5_SocialMedia_Backend](https://github.com/MandySpaan/GH_P5_SocialMedia_Backend)
+GeeksHub gave the following fictive assignment: to create the frontend part of the earlier created backend for a fictional social media. You can find the backend project here: [SocialMedia_Backend](https://github.com/MandySpaan/SocialMedia_Backend)
 
 The requirements for the website include:
 
@@ -66,7 +66,7 @@ Included extras:
 
 ### Backend
 
-You can find the backend project here: [GH_P5_SocialMedia_Backend](https://github.com/MandySpaan/GH_P5_SocialMedia_Backend)
+You can find the backend project here: [SocialMedia_Backend](https://github.com/MandySpaan/SocialMedia_Backend)
 
 1. Clone the repository
    `$ git clone https://github.com/MandySpaan/GH_P5_SocialMedia_Backend`
